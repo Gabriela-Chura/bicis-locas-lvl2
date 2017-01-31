@@ -1,6 +1,12 @@
 
-function validateForm(){
-	/* Escribe tú código aquí */
+
+
+
+
+/* OTRA FORMA */ 
+
+ function validateForm(){
+	
 	var nombre = document.getElementById('name');
 	var apellido = document.getElementById('lastname');
 	var email = document.getElementById('input-email');
@@ -52,12 +58,12 @@ function createMessage(_inputID, _message)
 
 	if(elemento.nextSibling == null)
 	{
-		//El span no existe
+		
 		var span = document.createElement('span');
 		span.innerHTML = _message;
 		elemento.parentNode.appendChild(span);
 	}else{
-		//El span ya existe
+		
 		if(elemento.nextSibling.tagName == 'SPAN')
 		{
 			elemento.nextSibling.innerHTML = _message;
@@ -72,7 +78,6 @@ function createMessage(_inputID, _message)
 }
 
 
-// Validaciones
 
 var Validator = {
 	isText:function (_string)
@@ -93,9 +98,12 @@ var Validator = {
 
 		return isValid;
 	}
-};
+}; 
+ 
 
 
+
+/* OTRA FORMA */ 
 
 /* function validateForm(evt) {
 
@@ -175,3 +183,4 @@ var x = document.getElementsByClassName("contenedor");
 }
     
 */ 
+
