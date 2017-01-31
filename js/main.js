@@ -1,6 +1,103 @@
-document.getElementById("input-password").setAttribute("minlength", "6"); 
 
-function validateForm(evt) {
+function validateForm(){
+	/* Escribe tú código aquí */
+	var nombre = document.getElementById('name');
+	var apellido = document.getElementById('lastname');
+	var email = document.getElementById('input-email');
+	var contraseña = document.getElementById('input-password');
+
+	if(Validator.isText(nombre.value))
+	{
+		removeMessage('name');
+	}else{
+		createMessage('name', 'No es válido');
+	}
+
+	if(Validator.isText(apellido.value))
+	{
+		removeMessage('lastname');
+	}else{
+		createMessage('lastname', 'Ingresa tu apellido');
+	}
+
+	if(Validator.isValidPassword(contraseña.value))
+	{
+		removeMessage('input-password');
+	}else{
+		createMessage('input-password', 'Tu password no es válido');
+	}
+
+	if(Validator.isEmail(email.value))
+	{
+		removeMessage('input-email');
+	}else{
+		createMessage('input-email', 'Tu e-mail no es válido');
+	}
+}
+
+
+function removeMessage(_inputID)
+{
+	var elemento = document.getElementById(_inputID);
+
+	if(elemento.nextSibling != null)
+	{
+		elemento.parentNode.removeChild(elemento.nextSibling);
+	}
+}
+
+function createMessage(_inputID, _message)
+{
+	var elemento = document.getElementById(_inputID);
+
+	if(elemento.nextSibling == null)
+	{
+		//El span no existe
+		var span = document.createElement('span');
+		span.innerHTML = _message;
+		elemento.parentNode.appendChild(span);
+	}else{
+		//El span ya existe
+		if(elemento.nextSibling.tagName == 'SPAN')
+		{
+			elemento.nextSibling.innerHTML = _message;
+		}else{
+			elemento.parentNode.removeChild(elemento.nextSibling);
+
+			var span = document.createElement('span');
+			span.innerHTML = _message;
+			elemento.parentNode.appendChild(span);
+		}
+	}
+}
+
+
+// Validaciones
+
+var Validator = {
+	isText:function (_string)
+	{
+		var regex = /([0-9]+)/;
+		return !regex.test(_string);
+	},
+	isEmail:function (_string)
+	{
+		var regex = /([a-zA-Z]+[@][a-zA-Z]+[.][a-zA-Z]+)/g;
+		return regex.test(_string);
+	},
+	isValidPassword: function (_string)
+	{
+		var isValid = true;
+		if(_string.length < 6 || _string == '098754' || _string == '123456' || _string == 'password')
+			isValid = false;
+
+		return isValid;
+	}
+};
+
+
+
+/* function validateForm(evt) {
 
 var nombre, apellido, email, contrasena;
 nombre = document.getElementById("name").value;
@@ -77,5 +174,4 @@ var x = document.getElementsByClassName("contenedor");
     
 }
     
-
-
+*/ 
