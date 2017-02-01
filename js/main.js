@@ -1,11 +1,93 @@
 
+function validateForm(){
+	var nombre = document.getElementById("name");
+	var apellido = document.getElementById("lastname");
+	var email = document.getElementById('input-email');
+	var contra = document.getElementById('input-password');
+	
+	
+	vacioValid(apellido,email,contra);
+
+	
+}
+
+function vacioValid (_name){
+	
+	if(_name.value.length == 0){
+		var span = document.createElement('SPAN');
+		span.innerHTML ="Llene los campos";
+		_name.parentNode.appendChild(span);
+	}else{
+		if(_name.nextSibling != null){
+			_name.parentNode.removeChild(_name.nextSibling); 	
+		}
+	}
+}
+
+
+/*function apellidoValid (_email){
+	
+
+	if(_email.value.length == 0){
+		var span = document.createElement('SPAN');
+		span.innerHTML ="Apellido vacío";
+		_email.parentNode.appendChild(span);
+	}else{
+		if(_email.nextSibling != null){
+			_email.parentNode.removeChild(_email.nextSibling); 	
+		}
+	}
+}*/
+
+/*function apellidoValid (_contra){
+	
+	
+	if(_contra.value.length == 0){
+		var span = document.createElement('SPAN');
+		span.innerHTML ="Apellido vacío";
+		_contra.parentNode.appendChild(span);
+	}else{
+		if(_contra.nextSibling != null){
+			_contra.parentNode.removeChild(_contra.nextSibling); 	
+		}
+	}
+}*/
+
+
+/*function nombreValid (_nombre){
+	
+	var correcto = /([0-9])/g;
+	if (correcto.test(_nombre.value)){
+		var span = document.createElement('SPAN');
+		span.innerHTML ="Nombre inválido";
+		_nombre.parentNode.appendChild(span);
+	}else{
+		if(_nombre.nextSibling != null){
+			_nombre.parentNode.removeChild(_nombre.nextSibling); 	
+		}
+}}
+
+function apellidoValid (apellido){
+	apellido = document.getElementById('lastname');
+	var correcto = /([0-9])/g;
+	if (correcto.test(apellido.value)){
+		var span = document.createElement('SPAN');
+		span.innerHTML ="Apellido inválido";
+		apellido.parentNode.appendChild(span);
+	}else{
+		if(apellido.nextSibling != null){
+			apellido.parentNode.removeChild(apellido.nextSibling); 	
+		}
+}}*/
+
+
 
 
 
 
 /* OTRA FORMA */ 
 
- function validateForm(){
+/*function validateForm(){
 	
 	var nombre = document.getElementById('name');
 	var apellido = document.getElementById('lastname');
@@ -97,9 +179,12 @@ var Validator = {
 			isValid = false;
 
 		return isValid;
-	}
+	},
+	
+	
 }; 
  
+ */
 
 
 
