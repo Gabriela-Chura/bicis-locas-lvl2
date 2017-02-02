@@ -1,61 +1,27 @@
 
-function validateForm(){
-	var nombre = document.getElementById("name");
-	var apellido = document.getElementById("lastname");
-	var email = document.getElementById('input-email');
-	var contra = document.getElementById('input-password');
+function nombreValid (name){
+	var name = document.getElementById("name").value;
+	var Valid = false; 
+	if(name == ''){
+		
+		var span = document.createElement('SPAN');
+		span.textContent ="Llene los campos";
+		var nombre = document.getElementById("name");
+	   	nombre.parentNode.appendChild(span);
+		Valid=false;
+		
+	}else{
+		if(name.nextSibling != null){
+			var nombre = document.getElementById("name");
+			nombre.parentNode.removeChild(name.nextSibling); 	
+		}
+		Valid = true; 
+	}
 	
-	
-	vacioValid(apellido,email,contra);
-
-	
+	return Valid; 
 }
 
-function vacioValid (_name){
-	
-	if(_name.value.length == 0){
-		var span = document.createElement('SPAN');
-		span.innerHTML ="Llene los campos";
-		_name.parentNode.appendChild(span);
-	}else{
-		if(_name.nextSibling != null){
-			_name.parentNode.removeChild(_name.nextSibling); 	
-		}
-	}
-}
-
-
-/*function apellidoValid (_email){
-	
-
-	if(_email.value.length == 0){
-		var span = document.createElement('SPAN');
-		span.innerHTML ="Apellido vacío";
-		_email.parentNode.appendChild(span);
-	}else{
-		if(_email.nextSibling != null){
-			_email.parentNode.removeChild(_email.nextSibling); 	
-		}
-	}
-}*/
-
-/*function apellidoValid (_contra){
-	
-	
-	if(_contra.value.length == 0){
-		var span = document.createElement('SPAN');
-		span.innerHTML ="Apellido vacío";
-		_contra.parentNode.appendChild(span);
-	}else{
-		if(_contra.nextSibling != null){
-			_contra.parentNode.removeChild(_contra.nextSibling); 	
-		}
-	}
-}*/
-
-
-/*function nombreValid (_nombre){
-	
+function nameCorrecto(_nombre){
 	var correcto = /([0-9])/g;
 	if (correcto.test(_nombre.value)){
 		var span = document.createElement('SPAN');
@@ -67,21 +33,75 @@ function vacioValid (_name){
 		}
 }}
 
-function apellidoValid (apellido){
-	apellido = document.getElementById('lastname');
+function apellidoValid (_ape){
+	var Valid = false; 
+	if(_ape.value== ''){
+		var span = document.createElement('SPAN');
+		span.innerHTML ="Llene los campos";
+		_ape.parentNode.appendChild(span);
+		Valid=false;
+	}else{
+		if(_ape.nextSibling != null){
+			_ape.parentNode.removeChild(_ape.nextSibling); 	
+		}
+		Valid = true; 
+	}
+	return Valid; 
+}
+
+
+function lastnameCorrecto(_apellido){
 	var correcto = /([0-9])/g;
-	if (correcto.test(apellido.value)){
+	if (correcto.test(_apellido.value)){
 		var span = document.createElement('SPAN');
 		span.innerHTML ="Apellido inválido";
-		apellido.parentNode.appendChild(span);
+		_apellido.parentNode.appendChild(span);
 	}else{
-		if(apellido.nextSibling != null){
-			apellido.parentNode.removeChild(apellido.nextSibling); 	
+		if(_apellido.nextSibling != null){
+			_apellido.parentNode.removeChild(_apellido.nextSibling); 	
 		}
-}}*/
+}}
+
+function emailValid (_email){
+	
+	if(_email.value.length == 0){
+		var span = document.createElement('SPAN');
+		span.innerHTML ="Llene los campos";
+		_email.parentNode.appendChild(span);
+	}else{
+		if(_email.nextSibling != null){
+			_email.parentNode.removeChild(_email.nextSibling); 	
+		}
+	}
+}
+
+function contraValid (_contra){
+	
+	if(_contra.value.length == 0){
+		var span = document.createElement('SPAN');
+		span.innerHTML ="Llene los campos";
+		_contra.parentNode.appendChild(span);
+	}else{
+		if(_contra.nextSibling != null){	_contra.parentNode.removeChild(_contra.nextSibling); 	
+		}
+	}
+}
 
 
 
+
+function passwordCorrecto(_contra){
+	
+	if(_contra.value.length < 6 || _contra.value == '098754' || _contra.value == '123456' || _contra.value == 'password'){
+	var span = document.createElement('SPAN');
+	span.innerHTML ="Contraseña inválida";
+	_contra.parentNode.appendChild(span);
+	}else{
+	if(_contra.nextSibling != null){
+	_contra.parentNode.removeChild(_contra.nextSibling); 	
+		}
+			
+}}
 
 
 
@@ -269,3 +289,29 @@ var x = document.getElementsByClassName("contenedor");
     
 */ 
 
+function validateForm(){
+	var nombre = document.getElementById("name");
+	var apellido = document.getElementById("lastname");
+	var email = document.getElementById('input-email');
+	var contra = document.getElementById('input-password');
+	
+	
+	
+	
+//	console.log(nombre.value);
+//	console.log(apellido.value);
+	if(nombreValid(nombre)){
+		nameCorrecto(nombre);
+	}
+	
+	if(apellidoValid(apellido)){
+		lastnameCorrecto(apellido);
+	}
+	
+	emailValid(email);
+	contraValid(contra);
+	
+	
+	//passwordCorrecto(contra);
+	
+}
