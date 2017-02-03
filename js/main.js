@@ -1,19 +1,15 @@
 
-function nombreValid (name){
-	var name = document.getElementById("name").value;
+function nombreValid (_name){
 	var Valid = false; 
-	if(name == ''){
-		
+	if(_name.value == ''){
 		var span = document.createElement('SPAN');
 		span.textContent ="Llene los campos";
-		var nombre = document.getElementById("name");
-	   	nombre.parentNode.appendChild(span);
+	   	_name.parentNode.appendChild(span);
 		Valid=false;
 		
 	}else{
-		if(name.nextSibling != null){
-			var nombre = document.getElementById("name");
-			nombre.parentNode.removeChild(name.nextSibling); 	
+		if(_name.nextSibling != null){
+			_name.parentNode.removeChild(_name.nextSibling); 	
 		}
 		Valid = true; 
 	}
@@ -76,15 +72,18 @@ function emailValid (_email){
 }
 
 function contraValid (_contra){
-	
+	var Valid = false; 
 	if(_contra.value.length == 0){
 		var span = document.createElement('SPAN');
 		span.innerHTML ="Llene los campos";
 		_contra.parentNode.appendChild(span);
+        Valid=false;
 	}else{
 		if(_contra.nextSibling != null){	_contra.parentNode.removeChild(_contra.nextSibling); 	
 		}
+        Valid = true;
 	}
+    return Valid; 
 }
 
 
@@ -102,6 +101,46 @@ function passwordCorrecto(_contra){
 		}
 			
 }}
+
+function listaValid (_lista){
+    
+    if(_lista.value == 0){
+    var span = document.createElement('SPAN');
+	span.innerHTML ="Seleccione una bici";
+	_lista.parentNode.appendChild(span);
+        }    
+    else{
+            if(_lista.value != 0){
+                _lista.parentNode.removeChild(_lista.nextSibling);
+            }
+        }
+}
+
+
+
+
+
+function convertirMayus(string)
+{
+	var string= document.getElementById(string);
+	var arreglo = string.value.split("");
+    var first = String(arreglo[0]);
+    var mayus = first.toUpperCase();
+    var Valid = false;
+        
+    for(var i=1; i<arreglo.length; i++) {
+         if(Valid){
+            mayus += arreglo[i].toUpperCase();
+            Valid = false;
+            } else {
+                mayus += arreglo[i];
+                if(arreglo[i] == " ")
+                    Valid = true;
+            }
+        string.value = mayus;
+        }
+        return string.value;
+}
 
 
 
@@ -208,95 +247,12 @@ var Validator = {
 
 
 
-/* OTRA FORMA */ 
-
-/* function validateForm(evt) {
-
-var nombre, apellido, email, contrasena;
-nombre = document.getElementById("name").value;
-apellido = document.getElementById("lastname").value;
-email = document.getElementById("input-email").value;
-contraseña = document.getElementById("input-password").value;
-    
-    
-var lista = document.getElementById("lista").selectedIndex;
-    
-    var correo =  /\w+@\w+\.+[a-z]/;
-    // /\.com/; Busca la cadena “.com”.
-    // /\W/; Busca cualquier caracter que no sea alfanumérico ni ‘_’.
-    // /[a-z]/; Busca una letra de la ‘a’ a la ‘z’.
-    
-    var texto = /^[a-zA-Z\s]*$/;
-    // /1*234/; Buscaría: “234”,”1234″,”11234″,etc.
-    // $	Final de una línea	
-    // ^	Comienzo de una línea
-    
-var x = document.getElementsByClassName("contenedor");
-    for(i=0;i<= x.length; i++){
-        
-        if (nombre===""||apellido===""|| email===""|| contrasena ==="" || lista===""){
-        var text = document.createElement("span");
-        text.innerText = "Todos los campos deben estar llenos."; 
-        x[i].appendChild(text);
-        } else {
-            x[i].removeChild(x[i].lastChild);
-           if (!texto.test(nombre)){
-                var text = document.createElement("span");
-                text.innerText = "Ingrese por favor un nombre válido."; 
-                x[0].appendChild(text);
-            } else {
-                x[0].removeChild(x[0].text.lastChild);
-            } 
-            
-            if (!texto.test(apellido)){
-                var text = document.createElement("span");
-                text.innerText = "Ingrese por favor un apellido válido."; 
-                x[1].appendChild(text);
-            }else {
-                x[1].removeChild(x[1].text.lastChild);
-            } 
-            if(!correo.test(email)){
-                 var text = document.createElement("span");
-                text.innerText = "Ingrese por favor un correo válido"; 
-                x[2].appendChild(text);
-            } else {
-                x[2].removeChild(x[2].text.lastChild);
-            }
-            
-            if(contrasena === "password"|| contrasena==="123456"|| contrasenaa==="098754"){
-                var text = document.createElement("span");
-                text.innerText = "Ingrese por favor una contraseña válida"; 
-                x[3].appendChild(text);
-            }else {
-                x[3].removeChild(x[3].text.lastChild);
-            }
-            
-            if(lista == null || lista == 0) {
-                var text = document.createElement("span");
-                text.innerText = "Escoja una bici."; 
-                x[4].appendChild(text);
-            } else {
-                x[4].removeChild(x[4].text.lastChild);
-            }
-            
-    evt.preventDefault();
-    }
-    
-    }
-
-    
-}
-    
-*/ 
-
 function validateForm(){
 	var nombre = document.getElementById("name");
 	var apellido = document.getElementById("lastname");
 	var email = document.getElementById('input-email');
 	var contra = document.getElementById('input-password');
-	
-	
-	
+	var lista = document.getElementById("lista");
 	
 //	console.log(nombre.value);
 //	console.log(apellido.value);
@@ -309,9 +265,15 @@ function validateForm(){
 	}
 	
 	emailValid(email);
-	contraValid(contra);
 	
 	
-	//passwordCorrecto(contra);
+	if(contraValid(contra)){
+		passwordCorrecto(contra);
+	}
 	
+    listaValid(lista);
+
+    
+    convertirMayus('name');
+    convertirMayus('lastname');
 }
