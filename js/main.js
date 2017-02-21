@@ -1,4 +1,65 @@
+$(document).ready(function(){
+var span = $("#Mname");
 
+	$("#Mname").click(function(){
+  alert("Probando");
+});
+});
+
+
+function nombreValid (_name){
+	var Valid = false; 
+	if(_name.value == ''){
+		var span = document.createElement('SPAN');
+		span.textContent ="Llene los campos";
+	   	_name.parentNode.appendChild(span);
+		Valid=false;
+		
+	}else{
+		if(_name.nextSibling != null){
+			_name.parentNode.removeChild(_name.nextSibling); 	
+		}
+		Valid = true; 
+	}
+	
+	return Valid; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* OTRA FORMA */ 
+/*
+
+.val(); 
 function nombreValid (_name){
 	var Valid = false; 
 	if(_name.value == ''){
@@ -142,7 +203,7 @@ function convertirMayus(string)
         return string.value;
 }
 
-
+*/
 
 /* OTRA FORMA */ 
 
