@@ -15,17 +15,21 @@ function validateForm(){
 		lastnameCorrecto(apellido);
 	}
 	
-	emailValid(email);
-	
+	if(emailValid(email)){
+		emailCorrect(email);
+	}
 	
 	if(contraValid(contra)){
 		passwordCorrecto(contra);
 	}
 	
+	
     listaValid(lista);
 
-    
-  
+
+    convertirMayus(nombre);
+	convertirMayus(apellido);
+
 }
 
 
@@ -130,6 +134,22 @@ function contraValid (_contra){
 }
 
 
+function emailCorrect(_email){
+
+	var correcto =/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	if (correcto.test(_email.val())){
+		
+		//var span = document.createElement('SPAN');
+		//span.innerHTML ="Apellido inválido";
+		var span = $('<span>Contraseña inválida</span>');
+		_email.parent().append(span);
+	}else{
+		if(_email.parent().find('span').length > 0){
+			_email.next().remove(); 	
+		}
+	}
+}
+
 
 
 function passwordCorrecto(_contra){
@@ -164,133 +184,28 @@ function listaValid (_lista){
 }
 
 
-
-
-/* OTRA FORMA */ 
-/*
-
-.val(); 
-function nombreValid (_name){
-	var Valid = false; 
-	if(_name.value == ''){
-		var span = document.createElement('SPAN');
-		span.textContent ="Llene los campos";
-	   	_name.parentNode.appendChild(span);
-		Valid=false;
-		
-	}else{
-		if(_name.nextSibling != null){
-			_name.parentNode.removeChild(_name.nextSibling); 	
-		}
-		Valid = true; 
-	}
-	
-	return Valid; 
-}
-
-function nameCorrecto(_nombre){
-	var correcto = /([0-9])/g;
-	if (correcto.test(_nombre.value)){
-		var span = document.createElement('SPAN');
-		span.innerHTML ="Nombre inválido";
-		_nombre.parentNode.appendChild(span);
-	}else{
-		if(_nombre.nextSibling != null){
-			_nombre.parentNode.removeChild(_nombre.nextSibling); 	
-		}
-}}
-
-function apellidoValid (_ape){
-	var Valid = false; 
-	if(_ape.value== ''){
-		var span = document.createElement('SPAN');
-		span.innerHTML ="Llene los campos";
-		_ape.parentNode.appendChild(span);
-		Valid=false;
-	}else{
-		if(_ape.nextSibling != null){
-			_ape.parentNode.removeChild(_ape.nextSibling); 	
-		}
-		Valid = true; 
-	}
-	return Valid; 
-}
-
-
-function lastnameCorrecto(_apellido){
-	var correcto = /([0-9])/g;
-	if (correcto.test(_apellido.value)){
-		var span = document.createElement('SPAN');
-		span.innerHTML ="Apellido inválido";
-		_apellido.parentNode.appendChild(span);
-	}else{
-		if(_apellido.nextSibling != null){
-			_apellido.parentNode.removeChild(_apellido.nextSibling); 	
-		}
-}}
-
-function emailValid (_email){
-	
-	if(_email.value.length == 0){
-		var span = document.createElement('SPAN');
-		span.innerHTML ="Llene los campos";
-		_email.parentNode.appendChild(span);
-	}else{
-		if(_email.nextSibling != null){
-			_email.parentNode.removeChild(_email.nextSibling); 	
-		}
-	}
-}
-
-function contraValid (_contra){
-	var Valid = false; 
-	if(_contra.value.length == 0){
-		var span = document.createElement('SPAN');
-		span.innerHTML ="Llene los campos";
-		_contra.parentNode.appendChild(span);
-        Valid=false;
-	}else{
-		if(_contra.nextSibling != null){	_contra.parentNode.removeChild(_contra.nextSibling); 	
-		}
-        Valid = true;
-	}
-    return Valid; 
-}
-
-
-
-
-function passwordCorrecto(_contra){
-	
-	if(_contra.value.length < 6 || _contra.value == '098754' || _contra.value == '123456' || _contra.value == 'password'){
-	var span = document.createElement('SPAN');
-	span.innerHTML ="Contraseña inválida";
-	_contra.parentNode.appendChild(span);
-	}else{
-	if(_contra.nextSibling != null){
-	_contra.parentNode.removeChild(_contra.nextSibling); 	
-		}
-			
-}}
-
-function listaValid (_lista){
-    
-    if(_lista.value == 0){
-    var span = document.createElement('SPAN');
-	span.innerHTML ="Seleccione una bici";
-	_lista.parentNode.appendChild(span);
-        }    
-    else{
-            if(_lista.value != 0){
-                _lista.parentNode.removeChild(_lista.nextSibling);
+function convertirMayus(string)
+{
+	//var string= document.getElementById(string);
+	console.log(string.val()); 
+	var arreglo = string.val().split("");
+    var first = String(arreglo[0]);
+    var mayus = first.toUpperCase();
+    var Valid = false;
+        
+    for(var i=1; i<arreglo.length; i++) {
+         if(Valid){
+            mayus += arreglo[i].toUpperCase();
+            Valid = false;
+            } else {
+                mayus += arreglo[i];
+                if(arreglo[i] == " ")
+                    Valid = true;
             }
+        string.val(mayus);
         }
+        return string.val();
 }
-
-*/
-
-
-
 
 
 
@@ -394,6 +309,4 @@ var Validator = {
 }; 
  
  */
-
-
 
