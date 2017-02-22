@@ -15,12 +15,14 @@ function validateForm(){
 		lastnameCorrecto(apellido);
 	}
 	
-	emailValid(email);
-	
+	if(emailValid(email)){
+		emailCorrect(email);
+	}
 	
 	if(contraValid(contra)){
 		passwordCorrecto(contra);
 	}
+	
 	
     listaValid(lista);
 
@@ -114,6 +116,23 @@ function emailValid (_email){
 	 
 }
 
+function emailCorrect(_email){
+
+	var correcto =/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	if (correcto.test(_email.val())){
+		
+		//var span = document.createElement('SPAN');
+		//span.innerHTML ="Apellido inválido";
+		var span = $('<span>Contraseña inválida</span>');
+		_email.parent().append(span);
+	}else{
+		if(_email.parent().find('span').length > 0){
+			_email.next().remove(); 	
+		}
+	}
+}
+
+
 function contraValid (_contra){
 	var Valid = false; 
 	if(_contra.val() == ''){
@@ -189,6 +208,7 @@ function convertirMayus(string)
         }
         return string.val();
 }
+
 
 
 
@@ -292,5 +312,4 @@ var Validator = {
 }; 
  
  */
-
 
