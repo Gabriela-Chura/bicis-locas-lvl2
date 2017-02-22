@@ -1,23 +1,47 @@
-$(document).ready(function(){
-var span = $("#Mname");
 
-	$("#Mname").click(function(){
-  alert("Probando");
-});
-});
+function validateForm(){
+	var nombre = $("#name");
+	var apellido = $("#lastname");
+	var email = $('#input-email');
+	var contra = $('#input-password');
+	var lista = document.getElementById("lista");
+	
+
+	if(nombreValid(nombre)){
+		nameCorrecto(nombre);
+	}
+	
+	if(apellidoValid(apellido)){
+		lastnameCorrecto(apellido);
+	}
+	
+	emailValid(email);
+	
+	
+	if(contraValid(contra)){
+		passwordCorrecto(contra);
+	}
+	
+    listaValid(lista);
+
+    
+  
+}
 
 
 function nombreValid (_name){
 	var Valid = false; 
-	if(_name.value == ''){
-		var span = document.createElement('SPAN');
+	if(_name.val() == ''){
+		/*var span = document.createElement('SPAN');
 		span.textContent ="Llene los campos";
-	   	_name.parentNode.appendChild(span);
+	   	_name.parentNode.appendChild(span);*/
+		var span = $('<span>Llene los campos</span>');
+		_name.parent().append(span);
 		Valid=false;
 		
 	}else{
-		if(_name.nextSibling != null){
-			_name.parentNode.removeChild(_name.nextSibling); 	
+		if(_name.parent().find('span').length > 0){
+			_name.next().remove(); 	
 		}
 		Valid = true; 
 	}
@@ -25,6 +49,115 @@ function nombreValid (_name){
 	return Valid; 
 }
 
+function nameCorrecto(_nombre){
+	var correcto = /([0-9])/g;
+	if (correcto.test(_nombre.val())){
+		//var span = document.createElement('SPAN');
+		//span.innerHTML ="Nombre inválido";
+		var span = $('<span>Nombre inválido</span>');
+		_nombre.parent().append(span);
+	}else{
+		if(_nombre.parent().find('span').length > 0){
+			_nombre.next().remove(); 	
+		}
+}}
+
+function apellidoValid (_ape){
+	var Valid = false; 
+	if(_ape.val() == ''){
+		/*var span = document.createElement('SPAN');
+		span.innerHTML ="Llene los campos";
+		_ape.parentNode.appendChild(span);*/
+		var span = $('<span>Llene los campos</span>');
+		_ape.parent().append(span);
+		Valid=false;
+	}else{
+		if(_ape.parent().find('span').length > 0){
+			_ape.next().remove(); 	
+		}
+		Valid = true; 
+	}
+	return Valid; 
+}
+
+
+function lastnameCorrecto(_apellido){
+	var correcto = /([0-9])/g;
+	if (correcto.test(_apellido.val())){
+		//var span = document.createElement('SPAN');
+		//span.innerHTML ="Apellido inválido";
+		var span = $('<span>Apellido inválido</span>');
+		_apellido.parent().append(span);
+	}else{
+		if(_apellido.parent().find('span').length > 0){
+			_apellido.next().remove(); 	
+		}
+	}
+}
+
+function emailValid (_email){
+	
+	if(_email.val() == ''){
+		console.log('holaaa');
+		//var span = document.createElement('SPAN');
+		//span.innerHTML ="Llene los campos";
+		var span = $('<span>Llene los campos</span>');
+		_email.parent().append(span);
+		
+	}else{
+		if(_email.parent().find('span').length > 0){
+			_email.next().remove();	
+		}
+		
+	}
+	 
+}
+
+function contraValid (_contra){
+	var Valid = false; 
+	if(_contra.val() == ''){
+		//var span = document.createElement('SPAN');
+		//span.innerHTML ="Llene los campos";
+		var span = $('<span>Llene los campos</span>');
+		_contra.parent().append(span);
+        Valid=false;
+	}else{
+		if(_contra.parent().find('span').length > 0){	_contra.next().remove();	 	
+		}
+        Valid = true;
+	}
+    return Valid; 
+}
+
+
+
+
+function passwordCorrecto(_contra){
+	
+	if(_contra.value.length < 6 || _contra.value == '098754' || _contra.value == '123456' || _contra.value == 'password'){
+	var span = document.createElement('SPAN');
+	span.innerHTML ="Contraseña inválida";
+	_contra.parentNode.appendChild(span);
+	}else{
+	if(_contra.nextSibling != null){
+	_contra.parentNode.removeChild(_contra.nextSibling); 	
+		}
+			
+}}
+
+function listaValid (_lista){
+    
+    if(_lista.value == 0){
+    var span = document.createElement('SPAN');
+	span.innerHTML ="Seleccione una bici";
+	_lista.parentNode.appendChild(span);
+        }    
+    else{
+            if(_lista.value != 0){
+                _lista.parentNode.removeChild(_lista.nextSibling);
+            }
+        }
+}
 
 
 
@@ -177,33 +310,12 @@ function listaValid (_lista){
         }
 }
 
-
-
-
-
-function convertirMayus(string)
-{
-	var string= document.getElementById(string);
-	var arreglo = string.value.split("");
-    var first = String(arreglo[0]);
-    var mayus = first.toUpperCase();
-    var Valid = false;
-        
-    for(var i=1; i<arreglo.length; i++) {
-         if(Valid){
-            mayus += arreglo[i].toUpperCase();
-            Valid = false;
-            } else {
-                mayus += arreglo[i];
-                if(arreglo[i] == " ")
-                    Valid = true;
-            }
-        string.value = mayus;
-        }
-        return string.value;
-}
-
 */
+
+
+
+
+
 
 /* OTRA FORMA */ 
 
@@ -308,33 +420,3 @@ var Validator = {
 
 
 
-function validateForm(){
-	var nombre = document.getElementById("name");
-	var apellido = document.getElementById("lastname");
-	var email = document.getElementById('input-email');
-	var contra = document.getElementById('input-password');
-	var lista = document.getElementById("lista");
-	
-//	console.log(nombre.value);
-//	console.log(apellido.value);
-	if(nombreValid(nombre)){
-		nameCorrecto(nombre);
-	}
-	
-	if(apellidoValid(apellido)){
-		lastnameCorrecto(apellido);
-	}
-	
-	emailValid(email);
-	
-	
-	if(contraValid(contra)){
-		passwordCorrecto(contra);
-	}
-	
-    listaValid(lista);
-
-    
-    convertirMayus('name');
-    convertirMayus('lastname');
-}
