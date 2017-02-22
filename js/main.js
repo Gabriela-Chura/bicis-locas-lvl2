@@ -1,3 +1,45 @@
+$(document).ready(function(){
+    
+    $('#boton').click(function (){
+    var nombre = $('#name'); 
+    var span = $('SPAN');
+    $('#name').appendTo(span); 
+    });
+    
+});
+
+
+/*
+function validateForm(){
+	var nombre = document.getElementById("name");
+	var apellido = document.getElementById("lastname");
+	var email = document.getElementById('input-email');
+	var contra = document.getElementById('input-password');
+	var lista = document.getElementById("lista");
+	
+
+	if(nombreValid(nombre)){
+		nameCorrecto(nombre);
+	}
+	
+	if(apellidoValid(apellido)){
+		lastnameCorrecto(apellido);
+	}
+	
+	emailValid(email);
+	
+	
+	if(contraValid(contra)){
+		passwordCorrecto(contra);
+	}
+	
+    listaValid(lista);
+
+    
+    convertirMayus('name');
+    convertirMayus('lastname');
+}
+
 
 function nombreValid (_name){
 	var Valid = false; 
@@ -116,31 +158,10 @@ function listaValid (_lista){
         }
 }
 
+*/
 
 
 
-
-function convertirMayus(string)
-{
-	var string= document.getElementById(string);
-	var arreglo = string.value.split("");
-    var first = String(arreglo[0]);
-    var mayus = first.toUpperCase();
-    var Valid = false;
-        
-    for(var i=1; i<arreglo.length; i++) {
-         if(Valid){
-            mayus += arreglo[i].toUpperCase();
-            Valid = false;
-            } else {
-                mayus += arreglo[i];
-                if(arreglo[i] == " ")
-                    Valid = true;
-            }
-        string.value = mayus;
-        }
-        return string.value;
-}
 
 
 
@@ -247,33 +268,3 @@ var Validator = {
 
 
 
-function validateForm(){
-	var nombre = document.getElementById("name");
-	var apellido = document.getElementById("lastname");
-	var email = document.getElementById('input-email');
-	var contra = document.getElementById('input-password');
-	var lista = document.getElementById("lista");
-	
-//	console.log(nombre.value);
-//	console.log(apellido.value);
-	if(nombreValid(nombre)){
-		nameCorrecto(nombre);
-	}
-	
-	if(apellidoValid(apellido)){
-		lastnameCorrecto(apellido);
-	}
-	
-	emailValid(email);
-	
-	
-	if(contraValid(contra)){
-		passwordCorrecto(contra);
-	}
-	
-    listaValid(lista);
-
-    
-    convertirMayus('name');
-    convertirMayus('lastname');
-}
