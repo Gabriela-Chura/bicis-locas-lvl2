@@ -15,6 +15,7 @@ function validateForm(){
 		lastnameCorrecto(apellido);
 	}
 	
+
 	if(emailValid(email)){
 		emailCorrect(email);
 	}
@@ -100,22 +101,40 @@ function lastnameCorrecto(_apellido){
 }
 
 function emailValid (_email){
-	
+	var Valid = false; 
 	if(_email.val() == ''){
 		
 		//var span = document.createElement('SPAN');
 		//span.innerHTML ="Llene los campos";
 		var span = $('<span>Llene los campos</span>');
 		_email.parent().append(span);
-		
+		Valid=false;
 	}else{
 		if(_email.parent().find('span').length > 0){
 			_email.next().remove();	
 		}
-		
-	}
-	 
+		Valid = true; 
+		}
+	 return Valid; 
 }
+
+function emailCorrect(_email){
+
+	var correcto = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	
+	if (correcto.test(_email.val())){
+		
+		//var span = document.createElement('SPAN');
+		//span.innerHTML ="Apellido inválido";
+		var span = $('<span>Contraseña inválida</span>');
+		_email.parent().append(span);
+	}else{
+		if(_email.parent().find('span').length > 0){
+			_email.next().remove(); 	
+		}
+	}
+}
+
 
 function contraValid (_contra){
 	var Valid = false; 
@@ -131,23 +150,6 @@ function contraValid (_contra){
         Valid = true;
 	}
     return Valid; 
-}
-
-
-function emailCorrect(_email){
-
-	var correcto =/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-	if (correcto.test(_email.val())){
-		
-		//var span = document.createElement('SPAN');
-		//span.innerHTML ="Apellido inválido";
-		var span = $('<span>Contraseña inválida</span>');
-		_email.parent().append(span);
-	}else{
-		if(_email.parent().find('span').length > 0){
-			_email.next().remove(); 	
-		}
-	}
 }
 
 
