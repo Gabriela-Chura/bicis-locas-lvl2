@@ -120,13 +120,13 @@ function emailValid (_email){
 
 function emailCorrect(_email){
 
-	var correcto = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	var correcto = /([a-zA-Z]+[@][a-zA-Z]+[.][a-zA-Z]+)/g;
 	
-	if (correcto.test(_email.val())){
+	if (!correcto.test(_email.val())){
 		
 		//var span = document.createElement('SPAN');
 		//span.innerHTML ="Apellido inválido";
-		var span = $('<span>Contraseña inválida</span>');
+		var span = $('<span>Email inválida</span>');
 		_email.parent().append(span);
 	}else{
 		if(_email.parent().find('span').length > 0){
