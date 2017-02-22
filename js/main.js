@@ -4,7 +4,7 @@ function validateForm(){
 	var apellido = $("#lastname");
 	var email = $('#input-email');
 	var contra = $('#input-password');
-	var lista = document.getElementById("lista");
+	var lista = $("#lista");
 	
 
 	if(nombreValid(nombre)){
@@ -98,7 +98,7 @@ function lastnameCorrecto(_apellido){
 function emailValid (_email){
 	
 	if(_email.val() == ''){
-		console.log('holaaa');
+		
 		//var span = document.createElement('SPAN');
 		//span.innerHTML ="Llene los campos";
 		var span = $('<span>Llene los campos</span>');
@@ -134,57 +134,34 @@ function contraValid (_contra){
 
 function passwordCorrecto(_contra){
 	
-	if(_contra.value.length < 6 || _contra.value == '098754' || _contra.value == '123456' || _contra.value == 'password'){
-	var span = document.createElement('SPAN');
-	span.innerHTML ="Contraseña inválida";
-	_contra.parentNode.appendChild(span);
+	if(_contra.val().length < 6 || _contra.val() == '098754' || _contra.val() == '123456' || _contra.val() == 'password'){
+	//var span = document.createElement('SPAN');
+	//span.innerHTML ="Contraseña inválida";
+		var span = $('<span>Contraseña inválida</span>');
+	_contra.parent().append(span);
 	}else{
-	if(_contra.nextSibling != null){
-	_contra.parentNode.removeChild(_contra.nextSibling); 	
+	if(_contra.parent().find('span').length > 0){
+	_contra.next().remove(); 	
 		}
 			
-}}
+	}
+}
 
 function listaValid (_lista){
     
-    if(_lista.value == 0){
-    var span = document.createElement('SPAN');
-	span.innerHTML ="Seleccione una bici";
-	_lista.parentNode.appendChild(span);
+    if(_lista.val() == 0 ){
+    //var span = document.createElement('SPAN');
+	// span.innerHTML ="Seleccione una bici";
+		var span = $('<span>Seleccione una bici</span>');
+	_lista.parent().append(span);
         }    
     else{
-            if(_lista.value != 0){
-                _lista.parentNode.removeChild(_lista.nextSibling);
+            if(_lista.parent().find('span').length > 0){
+                _lista.next().remove(); 
             }
         }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
